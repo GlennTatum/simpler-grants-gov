@@ -12,12 +12,14 @@ import SearchResultListItemStatus from "./SearchResultListItemStatus";
 
 interface SearchResultsListItemProps {
   opportunity: Opportunity;
+  queryTerm: string;
   agencyNameLookup?: AgencyNamyLookup;
   saved?: boolean;
 }
 
 export default function SearchResultsListItem({
   opportunity,
+  queryTerm,
   agencyNameLookup,
   saved = false,
 }: SearchResultsListItemProps) {
@@ -41,6 +43,27 @@ export default function SearchResultsListItem({
     text-base-darker
   `;
 
+  const HighlightQueryTerms = (title: string) => {
+    const queryItems = new Set<string>(queryTerm.split(" "));
+    const titleItems = title.split(" ");
+
+    const display = titleItems.map((word) => {
+      if(queryItems.has(word)) {
+        return {className: "bg-yellow", data: word}
+      }
+      return {className: "", data: word}
+    })
+
+    const displayFormat = display.map((item) => {
+      const styles = `display-inline ${item.className}`
+      return (
+        <p className={styles} key={item.data + item.className}>{item.data} </p>
+      )
+    })
+
+    return displayFormat
+  }
+
   return (
     <div className={resultBorderClasses}>
       <div className="grid-row grid-gap">
@@ -52,7 +75,8 @@ export default function SearchResultsListItem({
                   href={`/opportunity/${opportunity?.opportunity_id}`}
                   className="usa-link usa-link"
                 >
-                  {opportunity?.opportunity_title}
+                  {HighlightQueryTerms(opportunity?.opportunity_title)}
+                  
                 </Link>
               </h2>
             </div>

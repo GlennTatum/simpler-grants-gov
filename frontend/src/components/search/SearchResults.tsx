@@ -84,7 +84,8 @@ const ResolvedSearchResults = async ({
             totalResults={totalResults}
           />
         </div>
-        <SearchResultsList searchResults={searchResults} queryTerm={query || ""} />
+        {/* 3601 add query */}
+        <SearchResultsList searchResults={searchResults} queryTerm={query || ""} /> 
         <SearchPagination
           totalPages={totalPages}
           page={page}
@@ -125,9 +126,10 @@ export default function SearchResults({
       <ResolvedSearchResults
         sortby={sortby}
         page={page}
-        query={query}
+        query={query} 
         searchResultsPromise={searchResultsPromise}
       />
+      {/* 3601 add query */}
     </Suspense>
   );
 }

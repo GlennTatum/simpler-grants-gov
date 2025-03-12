@@ -83,6 +83,7 @@ function Search({ searchParams, params }: SearchPageProps) {
                 query={query}
                 loadingMessage={t("loading")}
               ></SearchResults>
+              {/* 3601 add query */}
             </div>
           </div>
         </div>

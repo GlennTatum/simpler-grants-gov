@@ -47,7 +47,7 @@ export default async function SearchResultsList({
         <li key={opportunity?.opportunity_id}>
           <SearchResultsListItem
             opportunity={opportunity}
-            queryTerm={queryTerm}
+            queryTerm={queryTerm} // 3601
             saved={savedOpportunityIds.includes(opportunity?.opportunity_id)}
           />
         </li>

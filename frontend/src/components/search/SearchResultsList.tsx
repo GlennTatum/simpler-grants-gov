@@ -46,7 +46,7 @@ export default async function SearchResultsList({
       {searchResults.data.map((opportunity) => (
         <li key={opportunity?.opportunity_id}>
           <SearchResultsListItem
-            opportunity={opportunity}
+            opportunity={opportunity} 
             queryTerm={queryTerm}
             saved={savedOpportunityIds.includes(opportunity?.opportunity_id)}
           />

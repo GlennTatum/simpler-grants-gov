@@ -59,7 +59,7 @@ const ResolvedSearchResults = async ({
   ) {
     return (
       <ClientSideUrlUpdater
-        param={"page"}
+        param={"page"} 
         value={searchResults.pagination_info.total_pages.toString()}
       />
     );

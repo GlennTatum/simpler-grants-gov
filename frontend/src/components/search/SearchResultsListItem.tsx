@@ -13,7 +13,6 @@ import SearchResultListItemStatus from "./SearchResultListItemStatus";
 interface SearchResultsListItemProps {
   opportunity: Opportunity;
   queryTerm: string;
-  queryTerm: string;
   agencyNameLookup?: AgencyNamyLookup;
   saved?: boolean;
 }

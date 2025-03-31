@@ -18,6 +18,7 @@ from src.api.agencies_v1 import agency_blueprint as agencies_v1_blueprint
 from src.api.extracts_v1 import extract_blueprint as extracts_v1_blueprint
 from src.api.healthcheck import healthcheck_blueprint
 from src.api.opportunities_v1 import opportunity_blueprint as opportunities_v1_blueprint
+from src.api.eligible_v1 import eligible_blueprint as eligible_v1_blueprint
 from src.api.response import restructure_error_response
 from src.api.schemas import response_schema
 from src.api.users.user_blueprint import user_blueprint
@@ -135,6 +136,7 @@ def register_blueprints(app: APIFlask) -> None:
     app.register_blueprint(opportunities_v1_blueprint)
     app.register_blueprint(extracts_v1_blueprint)
     app.register_blueprint(agencies_v1_blueprint)
+    app.register_blueprint(eligible_v1_blueprint)
 
     auth_endpoint_config = AuthEndpointConfig()
     if auth_endpoint_config.auth_endpoint:

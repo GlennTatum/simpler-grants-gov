@@ -11,7 +11,7 @@ import src.api.eligible_v1.eligible_schema as eligible_schema
 from sqlalchemy import select
 from src.db.models.lookup_models import LkApplicantType
 
-from src.api.eligible_v1.eligible_blueprint import eligible_blueprint 
+from src.api.eligible_v1.eligible_blueprint import eligible_blueprint  
 
 @eligible_blueprint.post("/eligible_applicants")
 @eligible_blueprint.output(eligible_schema.EligibleListReponseSchema)

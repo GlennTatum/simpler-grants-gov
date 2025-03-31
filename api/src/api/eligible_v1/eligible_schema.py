@@ -13,4 +13,4 @@ class EligibleListReponseSchema(Schema):
     data = fields.List(
         fields.Nested(EligibleResponseSchema),
         metadata={"description": "list of eligible organizations"}
-    )
+    ) 

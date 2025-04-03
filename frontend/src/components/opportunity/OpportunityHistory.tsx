@@ -2,7 +2,6 @@ import { Summary } from "src/types/opportunity/opportunityResponseTypes";
 import { formatDate } from "src/utils/dateUtil";
 
 import { useTranslations } from "next-intl";
-import { ForecastOpportunityItem } from "./ForecastOpportunityItem";
 
 type Props = {
   summary: Summary;
@@ -52,7 +51,6 @@ const OpportunityHistory = ({ summary }: Props) => {
         title={t("archive_date")}
         content={formatHistoryDate(summary.archive_date)}
       />
-      <ForecastOpportunityItem summary={summary} />
     </div>
   );
 };

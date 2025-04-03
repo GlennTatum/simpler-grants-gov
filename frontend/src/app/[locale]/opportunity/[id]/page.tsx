@@ -22,6 +22,7 @@ import OpportunityIntro from "src/components/opportunity/OpportunityIntro";
 import OpportunityLink from "src/components/opportunity/OpportunityLink";
 import OpportunityStatusWidget from "src/components/opportunity/OpportunityStatusWidget";
 import { OpportunitySaveUserControl } from "src/components/user/OpportunitySaveUserControl";
+import { ForecastOpportunityItem } from "src/components/opportunity/ForecastOpportunityItem";
 
 type OpportunityListingProps = {
   params: Promise<{ id: string }>;
@@ -155,7 +156,9 @@ async function OpportunityListing({ params }: OpportunityListingProps) {
           </div>
 
           <div className="desktop:grid-col-4 tablet:grid-col-12 tablet:order-0">
-            <OpportunityStatusWidget opportunityData={opportunityData} />
+            <ForecastOpportunityItem summary={opportunityData.summary} />
+            <OpportunityStatusWidget opportunityData={opportunityData} /> 
+            {/* TODO OpportunityStatus widget is not apart of the figma what should we do? */}
             <OpportunityCTA id={opportunityData.opportunity_id} />
             <OpportunityAwardInfo opportunityData={opportunityData} />
             <OpportunityHistory summary={opportunityData.summary} />

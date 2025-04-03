@@ -34,7 +34,7 @@ const OpportunityCTA = ({ id }: { id: number }) => {
         rel="noopener noreferrer"
         className="display-block"
       >
-        <Button type="button" outline={true} className="margin-top-2">
+        <Button type="button" outline={true} className="margin-top-2" id={`simpler-save-grant-button-${id}`}>
           <span>{t("button_content")}</span>
           <USWDSIcon name="launch" className="usa-icon--size-4 text-middle" />
         </Button>

@@ -1,4 +1,4 @@
-import { Opportunity } from "src/types/opportunity/opportunityResponseTypes";
+import { OpportunityDetail } from "src/types/opportunity/opportunityResponseTypes";
 import { formatDate } from "src/utils/dateUtil";
 import { findFirstWhitespace } from "src/utils/generalUtils";
 
@@ -8,7 +8,7 @@ import ContentDisplayToggle from "src/components/ContentDisplayToggle";
 import { ForecastOpportunityItem } from "./ForecastOpportunityItem";
 
 type Props = {
-  opportunityData: Opportunity;
+  opportunityData: OpportunityDetail;
 };
 
 const CloseDateDescriptionDisplay = ({

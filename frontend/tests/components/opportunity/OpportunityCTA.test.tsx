@@ -1,5 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { createEvent, fireEvent, render, screen } from "@testing-library/react";
 import { useTranslationsMock } from "src/utils/testing/intlMocks";
+import userEvent from '@testing-library/user-event'
+import { usePathname } from 'next/navigation'
 
 import OpportunityCTA, {
   OpportunityContentBox,
@@ -27,6 +29,11 @@ describe("OpportunityCTA", () => {
       "https://test.grants.gov/search-results-detail/1",
     );
   });
+
+  it("redirects to legacy grants url on click", () => {
+
+
+  })
 });
 
 describe("OpportunityContentBox", () => {

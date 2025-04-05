@@ -15,8 +15,14 @@ export function getSearchInput(page: Page) {
 
 export async function fillSearchInputAndSubmit(term: string, page: Page) {
   const searchInput = getSearchInput(page);
+  const submitButton = page.locator(".usa-search > button[type='submit']");
+  // const count = await searchInput.count();
+  // const buttonCount = await searchInput.count();
+  // console.log("!!! searchinput", count, buttonCount);
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
   await searchInput.fill(term);
-  await page.click(".usa-search > button[type='submit']");
+  await expect(searchInput).toHaveValue(term);
+  await submitButton.click();
 }
 
 export function expectURLContainsQueryParam(
@@ -73,10 +79,8 @@ export async function selectSortBy(page: Page, sortByValue: string) {
 }
 
 export async function expectSortBy(page: Page, value: string) {
-  const selectedValue = await page
-    .locator('select[name="search-sort-by"]')
-    .inputValue();
-  expect(selectedValue).toBe(value);
+  const sortSelectElement = page.locator('select[name="search-sort-by"]');
+  await expect(sortSelectElement).toHaveValue(value);
 }
 
 export async function waitForSearchResultsInitialLoad(page: Page) {
@@ -217,4 +221,14 @@ export const validateTopLevelAndNestedSelectedFilterCounts = async (
   if (expectedNestedCount) {
     await expect(expanderButton).toContainText(`${expectedNestedCount}`);
   }
+};
+
+export const waitForFilterOptions = async (page: Page, filterType: string) => {
+  const filterButton = page.locator(
+    `button[aria-controls="opportunity-filter-${filterType}"]`,
+  );
+  await filterButton.click();
+  const filterOptions = page.locator(`input[name="${filterType}-*"]`);
+  await filterOptions.isVisible();
+  await filterButton.click();
 };

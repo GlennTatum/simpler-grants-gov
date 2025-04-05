@@ -16,6 +16,8 @@ const {
   FEATURE_OPPORTUNITY_OFF,
   FEATURE_AUTH_ON,
   FEATURE_SAVED_OPPORTUNITIES_ON,
+  FEATURE_SAVED_SEARCHES_ON,
+  FEATURE_APPLY_FORM_PROTOTYPE_OFF,
   AUTH_LOGIN_URL,
   API_JWT_PUBLIC_KEY,
   NEW_RELIC_ENABLED,
@@ -26,6 +28,8 @@ export const featureFlags = {
   searchOff: stringToBoolean(FEATURE_SEARCH_OFF),
   authOn: stringToBoolean(FEATURE_AUTH_ON),
   savedOpportunitiesOn: stringToBoolean(FEATURE_SAVED_OPPORTUNITIES_ON),
+  savedSearchesOn: stringToBoolean(FEATURE_SAVED_SEARCHES_ON),
+  applyFormPrototypeOff: stringToBoolean(FEATURE_APPLY_FORM_PROTOTYPE_OFF),
 };
 
 // home for all interpreted server side environment variables

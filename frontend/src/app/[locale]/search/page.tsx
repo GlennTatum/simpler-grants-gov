@@ -2,8 +2,9 @@ import { Metadata } from "next";
 import QueryProvider from "src/app/[locale]/search/QueryProvider";
 import { environment } from "src/constants/environments";
 import withFeatureFlag from "src/hoc/withFeatureFlag";
+import { searchForOpportunities } from "src/services/fetch/fetchers/searchFetcher";
+import { OptionalStringDict } from "src/types/generalTypes";
 import { LocalizedPageProps } from "src/types/intl";
-import { SearchParamsTypes } from "src/types/search/searchRequestTypes";
 import { Breakpoints } from "src/types/uiTypes";
 import { convertSearchParamsToProperTypes } from "src/utils/search/convertSearchParamsToProperTypes";
 
@@ -13,11 +14,11 @@ import { redirect } from "next/navigation";
 import { use } from "react";
 
 import ContentDisplayToggle from "src/components/ContentDisplayToggle";
+import { SaveSearchPanel } from "src/components/search/SaveSearchPanel";
 import SearchAnalytics from "src/components/search/SearchAnalytics";
 import SearchBar from "src/components/search/SearchBar";
 import SearchFilters from "src/components/search/SearchFilters";
 import SearchResults from "src/components/search/SearchResults";
-import { SaveSearchPanel } from "src/components/user/SaveSearchPanel";
 
 export async function generateMetadata({ params }: LocalizedPageProps) {
   const { locale } = await params;
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: LocalizedPageProps) {
   return meta;
 }
 type SearchPageProps = {
-  searchParams: Promise<SearchParamsTypes>;
+  searchParams: Promise<OptionalStringDict>;
   params: Promise<{ locale: string }>;
 };
 
@@ -48,6 +49,8 @@ function Search({ searchParams, params }: SearchPageProps) {
     resolvedSearchParams.page = "1";
   }
 
+  const searchResultsPromise = searchForOpportunities(convertedSearchParams);
+
   return (
     <>
       <SearchAnalytics
@@ -57,7 +60,7 @@ function Search({ searchParams, params }: SearchPageProps) {
       <QueryProvider>
         <div className="grid-container">
           <div className="search-bar">
-            <SearchBar query={query} />
+            <SearchBar queryTermFromParent={query} />
           </div>
           <div className="grid-row grid-gap">
             <div className="tablet:grid-col-4">
@@ -74,6 +77,7 @@ function Search({ searchParams, params }: SearchPageProps) {
                   category={category}
                   fundingInstrument={fundingInstrument}
                   agency={agency}
+                  searchResultsPromise={searchResultsPromise}
                 />
               </ContentDisplayToggle>
             </div>
@@ -82,6 +86,7 @@ function Search({ searchParams, params }: SearchPageProps) {
                 searchParams={convertedSearchParams}
                 query={query}
                 loadingMessage={t("loading")}
+                searchResultsPromise={searchResultsPromise}
               ></SearchResults>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { getOpportunityDetails } from "src/services/fetch/fetchers/opportunityFetcher";
 import { fetchSavedOpportunities } from "src/services/fetch/fetchers/savedOpportunityFetcher";
 import { LocalizedPageProps } from "src/types/intl";
-import { Opportunity } from "src/types/opportunity/opportunityResponseTypes";
+import { SearchResponseData } from "src/types/search/searchResponseTypes";
 
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -11,6 +11,9 @@ import { Button, GridContainer } from "@trussworks/react-uswds";
 
 import SearchResultsListItem from "src/components/search/SearchResultsListItem";
 import { USWDSIcon } from "src/components/USWDSIcon";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function generateMetadata({ params }: LocalizedPageProps) {
   const { locale } = await params;
@@ -25,7 +28,7 @@ export async function generateMetadata({ params }: LocalizedPageProps) {
 const SavedOpportunitiesList = ({
   opportunities,
 }: {
-  opportunities: Opportunity[];
+  opportunities: SearchResponseData;
 }) => {
   return (
     <ul className="usa-prose usa-list--unstyled">
@@ -53,7 +56,7 @@ const NoSavedOpportunities = ({
     <>
       <USWDSIcon
         name="star_outline"
-        className="grid-col-1 usa-icon usa-icon--size-6 margin-top-4"
+        className="text-primary-vivid grid-col-1 usa-icon usa-icon--size-6 margin-top-4"
       />
       <div className="margin-top-2 grid-col-11">
         <p className="usa-intro ">{noSavedCTA}</p>{" "}
